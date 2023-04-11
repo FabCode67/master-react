@@ -1,1 +1,1 @@
-# docker-init
+# master-init
