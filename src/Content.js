@@ -1,10 +1,12 @@
 import React from 'react'
+import { useState } from 'react';
 
 const Content = () => {
+    const [name, setName] = useState('Fabrice');
     const handleNameChange = () => {
         const names = ['Fab', 'Yvette', 'Barry', 'Ricardo'];
         const options = Math.round(Math.random() * names.length)
-        return names[options]
+        setName(names[options])
     };
 
     const handleEventsChange = () => {
@@ -20,8 +22,8 @@ const Content = () => {
     
     return (
         <main>
-            <p>Hello {handleNameChange()}</p>
-            <button onClick={handleEventsChange}>Click me</button>
+            <p>Hello {name}</p>
+            <button onClick={handleNameChange}>ClickName</button>
             <button onClick={()=>handleEventsChange2('Fabrice')}>Click me</button>
             <button onClick={(e)=>handleEventsChange3(e)}>Click me</button>
         </main>
