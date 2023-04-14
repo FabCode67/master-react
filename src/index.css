@@ -54,6 +54,22 @@ header h1 {
   margin: 0.5rem 0;
 }
 
+table {
+  border: #000 1px solid;
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0.5rem 0;
+}
+
+tbody tr:nth-child(
+  2n
+) {
+  background-color: #f2f2f2;
+}
+thead tr:first-child {
+  background-color: rgb(115, 145, 135);
+}
+
 main {
   width: 100%;
   display: flex;
@@ -62,6 +78,53 @@ main {
   justify-content: center;
   align-items: center;
   overflow: auto;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 0.5rem 0 0.5rem 0.5rem;
+  border-radius: 3px;
+  margin: 0.5rem 10rem 0rem 0rem;
+  background-color: #f2f2f2;
+}
+
+.item > label {
+  font-size: 0.75rem;
+  flex-grow: 1;
+}
+.item > label:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+.item input[type= "checkbox"] {
+  text-align: center;
+  width: 2.5rem;
+  width: 48px;
+  min-width: 48px;
+  height: 36px;
+  margin-right: 0.5rem;
+  cursor: pointer;
+}
+
+.item input[type= "checkbox"]:focus + label {
+  text-decoration: underline;
+}
+
+.item svg {
+  margin-right: 0.5rem;
+  width: 48px;
+  height: 36px;
+  min-width: 48px;
+  color: blue;
+  cursor: pointer;
+}
+
+.item svg:focus,
+.item svg:hover {
+  color: rgb(235, 5, 5);
 }
 
 footer{
