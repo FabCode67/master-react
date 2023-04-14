@@ -78,6 +78,7 @@ main {
   justify-content: center;
   align-items: center;
   overflow: auto;
+  justify-content: flex-start;
 }
 
 .item {
