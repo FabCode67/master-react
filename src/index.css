@@ -61,11 +61,10 @@ table {
   margin: 0.5rem 0;
 }
 
-tbody tr:nth-child(
-  2n
-) {
+tbody tr:nth-child(2n) {
   background-color: #f2f2f2;
 }
+
 thead tr:first-child {
   background-color: rgb(115, 145, 135);
 }
@@ -92,15 +91,17 @@ main {
   background-color: #f2f2f2;
 }
 
-.item > label {
+.item>label {
   font-size: 0.75rem;
   flex-grow: 1;
 }
-.item > label:hover {
+
+.item>label:hover {
   text-decoration: underline;
   cursor: pointer;
 }
-.item input[type= "checkbox"] {
+
+.item input[type="checkbox"] {
   text-align: center;
   width: 2.5rem;
   width: 48px;
@@ -110,7 +111,7 @@ main {
   cursor: pointer;
 }
 
-.item input[type= "checkbox"]:focus + label {
+.item input[type="checkbox"]:focus+label {
   text-decoration: underline;
 }
 
@@ -128,7 +129,57 @@ main {
   color: rgb(235, 5, 5);
 }
 
-footer{
+.addForm, .searchForm {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  margin: 0.5rem .5rem 0 2rem ;
+  padding: 0 2rem 0 1.5rem;
+  border-bottom: 1px solid hsl(0, 0%, 100%);
+}
+
+.addForm label {
+  position: absolute;
+  left: -9999px;
+}
+.searchForm label{
+  position: absolute;
+  left: -9999px;
+}
+
+.addForm input[type="text"] {
+  flex-grow: 1;
+  max-width: calc(100% - 50px);
+  min-height: 48px;
+  font-size: 1rem;
+  padding: 0.2rem;
+  border: 1px solid #000;
+  border-radius: 3px;
+}
+button {
+  margin: .5rem;
+  padding: 0.5rem;
+  border: 1px solid #000;
+  border-radius: 3px;
+  background-color: #f2f2f2;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #1ab808;
+}
+
+
+.searchForm input[type="text"] {
+  flex-grow: 1;
+  max-width: calc(100% - 50px);
+  min-height: 48px;
+  font-size: 1rem;
+  padding: 0.2rem;
+  border: 1px solid #000;
+  border-radius: 3px;
+}
+footer {
   border-radius: 3px;
   width: calc(100% - 2px);
   padding: 0 0.5rem;
