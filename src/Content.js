@@ -12,7 +12,7 @@ const Content = ({items, handleCheck, handleDelete}) => {
         { id: 4, firstname: 'Jill', lastname: 'Doe', age: 19 },
     ])
     return (
-        <main>
+        <>
             {items.length ? (
                <ItemList 
                 items = {items}
@@ -42,7 +42,7 @@ const Content = ({items, handleCheck, handleDelete}) => {
                     ))}
                 </tbody>
             </table>
-        </main>
+        </>
     )
 }
 

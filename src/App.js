@@ -6,14 +6,32 @@ import { AddItem } from './AddItem';
 import { SearchItem } from './SearchItem';
 
 function App() {
-
-  const [items, setItems] = useState(JSON.parse(localStorage.getItem('shoppingCart')) || [])
+  const URL_API = 'http://localhost:3500/items'
+  const [items, setItems] = useState([])
   const [newItem, setNewItem] = useState('')
   const [searchItem, setSearchItem] = useState('')
+  const [catchError, setCatchError] = useState(null)
+  const [isLoading, setIsLoading] = useState(true)
 
-  useEffect(()=>{
-    localStorage.setItem('shoppingCart', JSON.stringify(items))
-  }, [items])
+  useEffect(() => {
+
+    const fetchData = async () => {
+      try {
+        const reponse = await fetch(URL_API)
+        if(!reponse.ok) throw new Error('Error: You do not have permission to get data')
+        const listItem = await reponse.json()
+        setItems(listItem)
+        setCatchError(null)
+      } catch (error) {
+        setCatchError(error.message)
+      }finally{
+        setIsLoading(false)
+      }
+    }
+    setTimeout(() => {
+    (async () => fetchData())()
+    }, 2000);
+  }, [])
 
   const addItem = (item) => {
     const id = items.length ? items[items.length - 1].id + 1 : 1
@@ -47,16 +65,20 @@ function App() {
         setNewItem={setNewItem}
         handleSubmit={handleSubmit}
       />
-      <SearchItem 
+      <SearchItem
         searchItem={searchItem}
         setSearchItem={setSearchItem}
       />
-
-      <Content
+     <main>
+      {isLoading && <p style={{ textAlign: 'center' }}>Loading...</p>}
+      {catchError && <p style={{ textAlign: 'center', color: 'red' }}>{catchError}</p>}
+     {!catchError &&  !isLoading && <Content
         items={items.filter((item) => item.name.toLowerCase().includes(searchItem.toLowerCase()))}
         handleCheck={handleCheck}
         handleDelete={handleDelete}
       />
+     }
+      </main>
       <Footer
         length={items.length}
       />
