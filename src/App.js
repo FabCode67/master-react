@@ -4,6 +4,7 @@ import Footer from './Footer';
 import { useState, useEffect } from 'react';
 import { AddItem } from './AddItem';
 import { SearchItem } from './SearchItem';
+import apiRequest from './apiRequest';
 
 function App() {
   const URL_API = 'http://localhost:3500/items'
@@ -33,21 +34,52 @@ function App() {
     }, 2000);
   }, [])
 
-  const addItem = (item) => {
+  const addItem = async (item) => {
     const id = items.length ? items[items.length - 1].id + 1 : 1
     const newItem = { id, checked: false, name: item }
     const listItem = [...items, newItem]
     setItems(listItem)
+
+    const postOptions = {
+      method : 'POST',
+      headers: {
+         'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newItem)
+    }
+
+    const result = await apiRequest(URL_API, postOptions) 
+    if(result) setCatchError(result)
   }
 
-  const handleCheck = (id) => {
+  const handleCheck = async (id) => {
     const listItem = items.map((item) => item.id === id ? { ...item, checked: !item.checked } : item)
     setItems(listItem)
+
+    const myItem = listItem.filter((item) => item.id === id)
+    const putOptions = {
+      method : 'PATCH',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({checked: myItem[0].checked})
   }
 
-  const handleDelete = (id) => {
+  const reqUrl = `${URL_API}/${id}`
+  const result = await apiRequest(reqUrl, putOptions)
+  if(result) setCatchError(result)
+  }
+
+  const handleDelete = async (id) => {
     const newItems = items.filter((item) => item.id !== id)
     setItems(newItems)
+
+    const deleteOptions ={
+      method : 'DELETE',
+    }
+    const reqUrl = `${URL_API}/${id}`
+    const result = await apiRequest(reqUrl, deleteOptions)
+    if (result) return setCatchError(result)
   }
 
   const handleSubmit = (e) => {
